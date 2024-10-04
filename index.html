@@ -1,16 +1,64 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Lab 1</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>html template</title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
-</head>
+    <!-- mapbox gl javascript and stylesheet -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.6.0/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.6.0/mapbox-gl.css" rel="stylesheet"/>
+  </head>
 
-<body>
-  Hello world
-  <script src="script.js"></script>
-</body>
+  <body>
+    <div class="header">
+      <!-- <img src="images/city.jpg" /> -->
+      <img src="images/blue_city2.png" />
+      <div class="header-txt">
+        <h1>Lab 1</h1>
+        <p>Geocoding with 3D buildings</p>
+      </div>
+    </div>
 
+    <div id="geocoder">
+      <div class="geocoder-txt">
+        <p>
+          Enter an address: 
+          <input id="userAddress" type="text" size="30" value="" />
+          <button type="button" onclick="getInputValue();">Go to location!</button>
+          <button type="button" onclick="resetInputValue();">Clear textbox</button>
+        </p>
+        <!-- <br /> -->
+        <p>Examples:</p>
+        <!-- Examples: -->
+        <!-- <br /> -->
+        <ul>
+          <li>325 Broadway Boulder CO 80309</li>
+          <!-- <br /> -->
+          <li>1850 Table Mesa Dr, Boulder, CO 80305</li>
+        </ul>
+        <!-- </p> -->
+      </div>
+    </div>
+
+    <div id="map"></div>
+    <pre id="coordinates" class="coordinates"></pre>
+    <script src="script.js"></script>
+
+    <!-- <p>
+      Header image |
+      <a
+        href="https://pngtree.com/freepng/hand-painted-blue-city-building_3936679.html"
+        >png image from pngtree.com/</a
+      >
+      city PNG Designed By 588ku from
+      https://pngtree.com/freepng/hand-painted-blue-city-building_3936679.html?sol=downref&id=bef
+    </p> -->
+  </body>
+  <footer>
+    <p>
+      Header image reference from <a target="_blank" href="https://pngtree.com/freepng/hand-painted-blue-city-building_3936679.html">pngtree.com</a>
+    </p>
+  </footer>
 </html>
