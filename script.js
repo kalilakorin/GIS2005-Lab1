@@ -1,6 +1,4 @@
 // extra data set 
-// Title of dataset: Properties Managed by Parks and Recreation Polygons
-// https://open-data.bouldercolorado.gov/datasets/fdfc0410e75c48b6b9e53cf94bdbe224_1/explore?location=40.026699%2C-105.234200%2C11.81
 // Title of dataset: Street Centerlines
 // https://open-data.bouldercolorado.gov/datasets/abb2aa4b70d548f88a8d58f58e92963c_0/explore?location=0.363878%2C74.756650%2C0.00
 
@@ -9,39 +7,17 @@ mapboxgl.accessToken =
 const map = new mapboxgl.Map({
   container: "map", // container ID
   style: "mapbox://styles/jmfrimml/cm1g0660r03xz01rbav7b1hzu", // style url
-  // center: [-105.25, 39.98], // starting position [long, lat]
-  center: [-105.27155545946361, 40.018905853707025],
-  // zoom: 14 // starting zoom
-  zoom: 17.66
+  center: [-105.25, 39.98], // starting position [long, lat]
+  zoom: 16 // starting zoom
 });
-
-// Set a map marker with options.
-const marker = new mapboxgl.Marker({
-  color: "#CA3C1B",
-  draggable: true
-}).setLngLat([-105.25, 39.98])
-  .addTo(map);
-// Store the marker's longitude and latitude coordinates in a variable
-// const lngLat = marker.getLngLat();
-// Print the marker's longitude and latitude values in the console
-// console.log(`Longitude: ${lngLat.lng}, Latitude: ${lngLat.lat}`);
-function onDragEnd() {
-  const lngLat = marker.getLngLat();
-  coordinates.style.display = 'block';
-  coordinates.innerHTML = `Longitude: ${lngLat.lng}<br />Latitude: ${lngLat.lat}`;
-}
-// trigger the coordinate change when the map marker is dragged
-marker.on('dragend', onDragEnd);
 
 // Add zoom and rotation controls to the map.
 const nav = new mapboxgl.NavigationControl({
-  visualizePitch: true,
-  // element(color, '#2C7FB8')
-  // color: '#2C7FB8'
+  visualizePitch: true
 })
 map.addControl(nav, 'bottom-right');
 
-// Add a scale bar to the controls 
+// Add a scale bar to the map 
 const scale = new mapboxgl.ScaleControl({
   maxWidth: 100,
   unit: 'imperial'
@@ -75,13 +51,6 @@ function getInputValue() {
   Http.send();
 }
 
-function resetInputValue() {
-  document.getElementById("userAddress").value = "";
-  document.getElementById("geoResults").innerHTML = "";
-  document.getElementById("coordinates-table").innerHTML = "";
-  document.getElementById("most-likely-coordinates").innerHTML = "";
-}
-
 function writeCoords(geocoderResults) {
   let geoObj = JSON.parse(geocoderResults,(key, value)=>{
     return value;
@@ -97,13 +66,22 @@ function writeCoords(geocoderResults) {
   let geoPt = geoFeatures[0].geometry.coordinates;
   console.log(geoPt);
 
-  let geoPtText = "The most likely longitude and latitude is: " + geoPt[0] + ", " + geoPt[1];
-  console.log(geoPtText);
-  // go to the coordinates 
+  // go to the coordinates on map
   map.setCenter(geoPt);
-  // document.getElementById("most-likely-coordinates").innerHTML = geoPtText;
+  // display the coordinates
+  displayCoords(geoPt)
+}
+
+function displayCoords(geoPt) {
+  // Store the marker's longitude and latitude coordinates in a variable
+  const lngLat = geoPt;
+  coordinates.style.display = 'block';
+  coordinates.innerHTML = `Centered Coordinates<br />Longitude: ${lngLat[0]}<br />Latitude: ${lngLat[1]}`;
+  // Print the center longitude and latitude values in the console
+  console.log(`Longitude: ${lngLat[0]}, Latitude: ${lngLat[1]}`);
 }
 
 function resetInputValue() {
   document.getElementById("userAddress").value = "";
+  coordinates.style.display = '';
 }
