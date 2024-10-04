@@ -43,15 +43,18 @@ body {
     left: 2em;
 }
 
+.map-container {
+    position: relative;
+}
+
 .coordinates {
     background: rgba(0, 0, 0, 0.5);
     color: #fff;
     position: absolute;
-    bottom: -4em;
-    left: 5em;
+    bottom: 7em;
+    left: 3em;
     padding: 5px 10px;
     margin: 0;
-    align-self: center;
     font-size: 11px;
     line-height: 18px;
     border-radius: 3px;
